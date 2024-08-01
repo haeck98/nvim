@@ -107,6 +107,8 @@ require('lazy').setup({
       'hrsh7th/cmp-nvim-lsp',
       'hrsh7th/cmp-path',
 
+      'hrsh7th/cmp-cmdline',
+
       -- Adds a number of user-friendly snippets
       'rafamadriz/friendly-snippets',
     },
@@ -278,6 +280,14 @@ require('lazy').setup({
   --
   --    For additional information see: https://github.com/folke/lazy.nvim#-structuring-your-plugins
   -- { import = 'custom.plugins' },
+
+  {
+      'nvim-tree/nvim-tree.lua',
+      lazy = true,
+      dependencies = {
+          'nvim-tree/nvim-web-devicons',
+      },
+  },
 }, {})
 
 -- [[ Setting options ]]
@@ -551,6 +561,7 @@ end
 require('which-key').register {
   ['<leader>c'] = { name = '[C]ode', _ = 'which_key_ignore' },
   ['<leader>d'] = { name = '[D]ocument', _ = 'which_key_ignore' },
+  ["<leader>e"] = { "<cmd>NvimTreeToggle<cr>", "Explorer" },
   ['<leader>g'] = { name = '[G]it', _ = 'which_key_ignore' },
   ['<leader>h'] = { name = 'Git [H]unk', _ = 'which_key_ignore' },
   ['<leader>r'] = { name = '[R]ename', _ = 'which_key_ignore' },
@@ -675,3 +686,116 @@ cmp.setup {
 
 -- The line beneath this is called `modeline`. See `:help modeline`
 -- vim: ts=2 sts=2 sw=2 et
+--
+-- local status_ok, nvim_tree = pcall(require, "nvim-tree")
+-- if not status_ok then
+--   return
+-- end
+--
+-- local config_status_ok, nvim_tree_config = pcall(require, "nvim-tree.config")
+-- if not config_status_ok then
+--   return
+-- end
+--
+-- local tree_cb = nvim_tree_config.nvim_tree_callback
+--
+-- nvim_tree.setup {
+--   update_focused_file = {
+--     enable = true,
+--     update_cwd = true,
+--   },
+--   renderer = {
+--     root_folder_modifier = ":t",
+--  -- These icons are visible when you install web-devicons
+--     icons = {
+--       glyphs = {
+--         default = "",
+--         symlink = "",
+--         folder = {
+--           arrow_open = "",
+--           arrow_closed = "",
+--           default = "",
+--           open = "",
+--           empty = "",
+--           empty_open = "",
+--           symlink = "",
+--           symlink_open = "",
+--         },
+--         git = {
+--           unstaged = "",
+--           staged = "S",
+--           unmerged = "",
+--           renamed = "➜",
+--           untracked = "U",
+--           deleted = "",
+--           ignored = "◌",
+--         },
+--       },
+--     },
+--   },
+--   diagnostics = {
+--     enable = true,
+--     show_on_dirs = true,
+--     icons = {
+--       hint = "",
+--       info = "",
+--       warning = "",
+--       error = "",
+--     },
+--   },
+--   view = {
+--     width = 30,
+--     side = "left",
+--     mappings = {
+--       list = {
+--         { key = { "l", "<CR>", "o" }, cb = tree_cb "edit" },
+--         { key = "h", cb = tree_cb "close_node" },
+--         { key = "v", cb = tree_cb "vsplit" },
+--       },
+--     },
+--   },
+-- }
+--
+-- disable netrw at the very start of your init.lua
+vim.g.loaded_netrw = 1
+vim.g.loaded_netrwPlugin = 1
+
+-- optionally enable 24-bit colour
+vim.opt.termguicolors = true
+
+require("nvim-tree").setup({
+  sort = {
+    sorter = "case_sensitive",
+  },
+  view = {
+    width = 45,
+  },
+  renderer = {
+    group_empty = true,
+  },
+  filters = {
+    dotfiles = true,
+  },
+})
+
+-- nvim cmp-cmd setup
+-- let cmd = require('nvim-cmp')
+cmp.setup.cmdline('/', {
+  mapping = cmp.mapping.preset.cmdline(),
+  sources = {
+    { name = 'buffer' }
+  }
+})
+cmp.setup.cmdline(':', {
+  mapping = cmp.mapping.preset.cmdline(),
+  sources = cmp.config.sources({
+    { name = 'path' }
+  }, {
+    {
+      name = 'cmdline',
+      option = {
+        ignore_cmds = { 'Man', '!' }
+      }
+    }
+  })
+})
