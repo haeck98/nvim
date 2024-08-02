@@ -191,12 +191,29 @@ require('lazy').setup({
     },
   },
 
+  -- {
+  --   -- Theme inspired by Atom
+  --   'navarasu/onedark.nvim',
+  --   priority = 1000,
+  --   config = function()
+  --     vim.cmd.colorscheme 'onedark'
+  --   end,
+  -- },
+  -- {
+  --   'ellisonleao/gruvbox.nvim',
+  --   priority = 1000,
+  --   config = function()
+  --     vim.o.background = 'dark'
+  --     vim.cmd.colorscheme 'gruvbox'
+  --   end,
+  -- },
   {
-    -- Theme inspired by Atom
-    'navarasu/onedark.nvim',
+    'marko-cerovac/material.nvim',
     priority = 1000,
     config = function()
-      vim.cmd.colorscheme 'onedark'
+      vim.o.background = 'dark'
+      vim.g.material_style = "deep ocean"
+      vim.cmd.colorscheme 'material'
     end,
   },
 
