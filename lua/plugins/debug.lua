@@ -20,6 +20,8 @@ return {
 
     -- Add your own debuggers here
     'leoluz/nvim-dap-go',
+
+    'nvim-neotest/nvim-nio',
   },
   config = function()
     local dap = require 'dap'
@@ -82,6 +84,6 @@ return {
     dap.listeners.before.event_exited['dapui_config'] = dapui.close
 
     -- Install golang specific config
-    require('dap-go').setup()
+    -- require('dap-go').setup()
   end,
 }
