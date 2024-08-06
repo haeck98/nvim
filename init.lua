@@ -199,23 +199,23 @@ require('lazy').setup({
   --     vim.cmd.colorscheme 'onedark'
   --   end,
   -- },
-  -- {
-  --   'ellisonleao/gruvbox.nvim',
-  --   priority = 1000,
-  --   config = function()
-  --     vim.o.background = 'dark'
-  --     vim.cmd.colorscheme 'gruvbox'
-  --   end,
-  -- },
   {
-    'marko-cerovac/material.nvim',
+    'ellisonleao/gruvbox.nvim',
     priority = 1000,
     config = function()
       vim.o.background = 'dark'
-      vim.g.material_style = "deep ocean"
-      vim.cmd.colorscheme 'material'
+      vim.cmd.colorscheme 'gruvbox'
     end,
   },
+  -- {
+  --   'marko-cerovac/material.nvim',
+  --   priority = 1000,
+  --   config = function()
+  --     vim.o.background = 'dark'
+  --     vim.g.material_style = "deep ocean"
+  --     vim.cmd.colorscheme 'material'
+  --   end,
+  -- },
 
   {
     -- Set lualine as statusline
