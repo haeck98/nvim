@@ -269,7 +269,7 @@ require('lazy').setup({
     'nvim-treesitter/nvim-treesitter',
     dependencies = {
       'nvim-treesitter/nvim-treesitter-textobjects',
-      'nvim-treesitter/nvim-treesitter-angular',
+      -- 'nvim-treesitter/nvim-treesitter-angular',
     },
     build = ':TSUpdate',
   },
@@ -379,6 +379,7 @@ vim.api.nvim_create_autocmd('TextYankPost', {
 -- See `:help telescope` and `:help telescope.setup()`
 require('telescope').setup {
   defaults = {
+    path_display={"smart"},
     mappings = {
       i = {
         ['<C-u>'] = false,
